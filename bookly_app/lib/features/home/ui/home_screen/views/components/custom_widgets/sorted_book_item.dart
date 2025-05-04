@@ -1,16 +1,28 @@
+import 'package:bookly_app/core/theming/colors/colors.dart';
 import 'package:bookly_app/core/theming/styles/styles.dart';
 import 'package:bookly_app/features/home/data/models/best_seller_book_model.dart';
+import 'package:bookly_app/features/home/ui/home_screen/views/home_details.dart';
 import 'package:flutter/material.dart';
 
-class BestSellerItem extends StatelessWidget {
-  const BestSellerItem({super.key, required this.bestSellerBookModel});
+class SortedBookItem extends StatelessWidget {
+  const SortedBookItem({
+    super.key,
+    required this.bestSellerBookModel,
+    required this.id,
+  });
 
   final BestSellerBookModel bestSellerBookModel;
+  final String id;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (c) => HomeDetails(id: id)),
+        );
+      },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         spacing: 25,
@@ -22,7 +34,7 @@ class BestSellerItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(5),
               image: DecorationImage(
                 //TODO: change assetImage to networkImage
-                image: AssetImage(bestSellerBookModel.image),
+                image: NetworkImage(bestSellerBookModel.image),
                 fit: BoxFit.fill,
               ),
             ),
@@ -32,37 +44,29 @@ class BestSellerItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  bestSellerBookModel.bookName,
+                  bestSellerBookModel.title,
                   style: AppStyles.textStyle20,
-                  maxLines: 2,
+                  maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  bestSellerBookModel.bookAuthorName,
+                  bestSellerBookModel.publisher,
                   style: AppStyles.textStyle18,
                 ),
                 Row(
                   children: [
-                    Text(
-                      '${bestSellerBookModel.price} €',
-                      style: AppStyles.textStyle20.copyWith(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 23,
-                      ),
-                    ),
-                    Spacer(),
-                    Icon(Icons.star, color: Colors.yellow),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      padding: const EdgeInsets.only(right: 12.0),
                       child: Text(
-                        bestSellerBookModel.rate,
+                        'Page count : ',
                         style: AppStyles.textStyle20,
                       ),
                     ),
                     Text(
-                      bestSellerBookModel.numberOfUSerRate,
-                      style: AppStyles.textStyle18.copyWith(
-                        color: Colors.white70,
+                      bestSellerBookModel.pageCount,
+                      style: AppStyles.textStyle20.copyWith(
+                        color: AppColors.buttonColor,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ],
