@@ -1,17 +1,13 @@
 class BestSellerBookModel {
   final String image;
-  final String bookName;
-  final String bookAuthorName;
-  final String price;
-  final String rate;
-  final String numberOfUSerRate;
+  final String title;
+  final String publisher;
+  final String pageCount;
 
   BestSellerBookModel({
     required this.image,
-    required this.bookName,
-    required this.bookAuthorName,
-    required this.price,
-    required this.rate,
-    required this.numberOfUSerRate,
+    required this.title,
+    required this.publisher,
+    required this.pageCount,
   });
 }
